@@ -8,7 +8,9 @@ import (
 func Test_NewHTML_Should_Be_HTML(t *testing.T) {
 	expectedHTML := `<h1>hello</h1>`
 	htmlTemplate := `<h1>{{.Text}}</h1>`
-	htmlValiables := HTMLValiables{
+	htmlValiables := struct {
+		Text string
+	}{
 		Text: "hello",
 	}
 

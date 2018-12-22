@@ -11,7 +11,7 @@ type HTMLValiables struct {
 }
 
 // NewHTML - pass html template and html valiable struct for generate new html template
-func NewHTML(htmlTemplate string, htmlValiables HTMLValiables) string {
+func NewHTML(htmlTemplate string, htmlValiables interface{}) string {
 	readTemplate, _ := template.New("htmltemplate").Parse(htmlTemplate)
 	writer := fakeWriter.Writer{}
 	readTemplate.Execute(&writer, htmlValiables)
