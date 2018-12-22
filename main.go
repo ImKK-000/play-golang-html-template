@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"os"
 	"play-golang/generate"
 )
 
@@ -12,8 +10,9 @@ type HTMLVariables struct {
 	Names []string
 }
 
+const htmlTemplate = `<!DOCTYPE html><html lang="en"><body><h1>{{.Title}}</h1><ol>{{range .Names}}<li>{{.}}</li>{{else}}{{end}}</ol></body></html>`
+
 func main() {
-	readHTML, _ := ioutil.ReadFile("index.html")
 	htmlVariables := HTMLVariables{
 		Title: "Name of Persons",
 		Names: []string{
@@ -21,7 +20,6 @@ func main() {
 			"Imkk 000",
 		},
 	}
-	outputHTML := generate.NewHTML(string(readHTML), htmlVariables)
+	outputHTML := generate.NewHTML(htmlTemplate, htmlVariables)
 	fmt.Println(outputHTML)
-	ioutil.WriteFile("output.html", []byte(outputHTML), os.ModePerm)
 }
